@@ -2,6 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xaelith", "Xaelith\Xaelith.csproj", "{AEE6AF05-1628-4347-9B93-A619032E28CE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xaelith.DataModel", "Xaelith.DataModel\Xaelith.DataModel.csproj", "{CDDC91AA-B7A7-4E03-95F4-445122A9832D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xaelith.ServiceModel", "Xaelith.ServiceModel\Xaelith.ServiceModel.csproj", "{79CF9B95-D33E-4798-B74B-5669163A7FFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +16,13 @@ Global
 		{AEE6AF05-1628-4347-9B93-A619032E28CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEE6AF05-1628-4347-9B93-A619032E28CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEE6AF05-1628-4347-9B93-A619032E28CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDDC91AA-B7A7-4E03-95F4-445122A9832D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDDC91AA-B7A7-4E03-95F4-445122A9832D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDDC91AA-B7A7-4E03-95F4-445122A9832D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDDC91AA-B7A7-4E03-95F4-445122A9832D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79CF9B95-D33E-4798-B74B-5669163A7FFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79CF9B95-D33E-4798-B74B-5669163A7FFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79CF9B95-D33E-4798-B74B-5669163A7FFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79CF9B95-D33E-4798-B74B-5669163A7FFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
