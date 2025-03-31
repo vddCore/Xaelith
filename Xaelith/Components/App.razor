@@ -1,11 +1,20 @@
-﻿<!DOCTYPE html>
+﻿@using Xaelith.ServiceModel
+
+@inject IConfigurationService Configuration
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <title>@Configuration.Settings!.General.Title</title>
+    
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
     <base href="/"/>
-    <link rel="stylesheet" href="@Assets["Resources/Styles/main.css"]"/>
+
+    <link rel="stylesheet" href="xa-data/style/tailwind.css"/>
+    <link rel="stylesheet" href="xa-data/style/main.css"/>
     <ImportMap/>
     <HeadOutlet/>
 </head>

@@ -1,8 +1,13 @@
 using Xaelith.Components;
+using Xaelith.ServiceModel;
+using Xaelith.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddRazorComponents()
+builder.Services
+    .AddSingleton<IConfigurationService, ConfigurationService>()
+    .AddSingleton<StorageService>()
+    .AddRazorComponents()
     .AddInteractiveServerComponents();
 
 var app = builder.Build();
