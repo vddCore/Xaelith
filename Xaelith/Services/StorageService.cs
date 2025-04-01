@@ -1,8 +1,9 @@
 ﻿namespace Xaelith.Services;
 
-using Xaelith.DataModel.Composite;
+using Xaelith.DataModel.Storage;
+using Xaelith.ServiceModel;
 
-public class StorageService
+public class StorageService : IStorageService
 {
     public UserDatabase Users { get; } = new();
     public TagDatabase Tags { get; } = new();

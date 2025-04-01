@@ -7,11 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Update="FodyWeavers.xml" Visible="False" />
+  </ItemGroup>
+  
+  <ItemGroup>
     <PackageReference Include="Fody" Version="6.9.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    
     <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
   </ItemGroup>
-  
 </Project>

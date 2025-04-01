@@ -1,4 +1,4 @@
-﻿namespace Xaelith.DataModel.Composite;
+﻿namespace Xaelith.DataModel.Storage;
 
 using Xaelith.DataModel.Abstract;
 

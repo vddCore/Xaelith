@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
     .AddSingleton<IConfigurationService, ConfigurationService>()
-    .AddSingleton<StorageService>()
+    .AddSingleton<IStorageService, StorageService>()
     .AddRazorComponents()
     .AddInteractiveServerComponents();
 
