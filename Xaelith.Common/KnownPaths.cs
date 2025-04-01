@@ -2,6 +2,7 @@
 
 public static class KnownPaths
 {
+    public static readonly string Core = Path.Combine(AppContext.BaseDirectory, "xa-core");
     public static readonly string Data = Path.Combine(AppContext.BaseDirectory, "xa-data");
     public static readonly string Configuration = Path.Combine(Data, "config");
     public static readonly string Content = Path.Combine(Data, "content");
@@ -11,6 +12,7 @@ public static class KnownPaths
 
     static KnownPaths()
     {
+        Directory.CreateDirectory(Core);
         Directory.CreateDirectory(Data);
         Directory.CreateDirectory(Configuration);
         Directory.CreateDirectory(Content);

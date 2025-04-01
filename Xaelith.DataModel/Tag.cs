@@ -3,10 +3,11 @@
 using System.Text.Json.Serialization;
 using Xaelith.DataModel.Abstract;
 
-public class Tag(string name) : IIdentifiable,
-                                IDated,
-                                IAuthored,
-                                IRoutable
+public record Tag(string name) : IIdentifiable,
+                                 INameable,
+                                 IDated,
+                                 IAuthored,
+                                 IRoutable
 {
     [JsonPropertyName("id")]
     public Guid Id { get; set; } = Guid.NewGuid();

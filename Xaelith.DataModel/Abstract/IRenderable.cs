@@ -2,6 +2,5 @@
 
 public interface IRenderable
 {
-    string Title { get; set; }
     string ContentDirectoryPath { get; set; }
 }

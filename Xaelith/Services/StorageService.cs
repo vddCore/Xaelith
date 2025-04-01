@@ -4,6 +4,7 @@ using System.Text.Json;
 using Xaelith.Common;
 using Xaelith.DataModel;
 using Xaelith.DataModel.Abstract;
+using Xaelith.DataModel.Abstract.Storage;
 using Xaelith.DataModel.Configuration;
 using Xaelith.DataModel.Storage;
 using Xaelith.ServiceModel;

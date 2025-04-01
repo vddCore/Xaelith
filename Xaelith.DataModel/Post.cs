@@ -4,9 +4,11 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Xaelith.DataModel.Abstract;
 
-public class Post : IIdentifiable,
-                    IDated, 
-                    IRenderable
+public record Post : IIdentifiable,
+                     INameable,
+                     IDated, 
+                     IRenderable,
+                     IRoutable
 {
     [JsonPropertyName("id")]
     public Guid Id { get; set; } = Guid.NewGuid();
@@ -20,8 +22,8 @@ public class Post : IIdentifiable,
     [JsonPropertyName("author")]
     public string Author { get; set; } = string.Empty;
     
-    [JsonPropertyName("title")]
-    public string Title { get; set; } = string.Empty;
+    [JsonPropertyName("name")]
+    public string Name { get; set; } = string.Empty;
     
     [JsonPropertyName("content_directory_path")]
     public string ContentDirectoryPath { get; set; } = string.Empty;
@@ -32,6 +34,9 @@ public class Post : IIdentifiable,
     [JsonPropertyName("tags")]
     public List<Tag> Tags { get; set; } = [];
 
+    [JsonPropertyName("slug")]
+    public string Slug { get; set; } = string.Empty;
+    
     public static async Task<Post> FromFile(string filePath)
     {
         using (var fs = File.OpenRead(filePath))
@@ -40,4 +45,5 @@ public class Post : IIdentifiable,
                 ?? throw new IOException($"The file '{filePath}' could not be deserialized.");
         }
     }
+
 }

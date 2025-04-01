@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Slugify.Core" Version="5.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Xaelith" />
+    <InternalsVisibleTo Include="Xaelith.DataModel" />
+    <InternalsVisibleTo Include="Xaelith.ServiceModel" />
+  </ItemGroup>
 </Project>

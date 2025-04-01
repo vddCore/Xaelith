@@ -10,4 +10,9 @@
     <ProjectReference Include="..\Xaelith.DataModel\Xaelith.DataModel.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="Xaelith" />
+    <InternalsVisibleTo Include="Xaelith.Common" />
+    <InternalsVisibleTo Include="Xaelith.DataModel" />
+  </ItemGroup>
 </Project>

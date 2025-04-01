@@ -62,6 +62,6 @@ public class ConfigurationService : IConfigurationService
         }
     }
 
-    private void OnSettingsChanged(object? _, PropertyChangedEventArgs _)
+    private void OnSettingsChanged(object? _, PropertyChangedEventArgs e)
         => Save();
 }

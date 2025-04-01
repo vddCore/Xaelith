@@ -3,7 +3,9 @@
 using System.Text.Json.Serialization;
 using Xaelith.DataModel.Abstract;
 
-public class User : IDated
+public record User : IIdentifiable,
+                     IDated,
+                     INameable
 {
     public static readonly User Nobody = new()
     {
@@ -11,14 +13,17 @@ public class User : IDated
         CreatedDate = DateTime.UnixEpoch,
         LastEditDate = DateTime.UnixEpoch,
         LastLoginDate = DateTime.UnixEpoch,
-        LoginName = "nobody",
+        Name = "nobody",
         DisplayName = string.Empty,
         Email = "nobody@nowhere.com",
         PasswordHash = string.Empty,
         PasswordSalt = string.Empty,
         Role = UserRole.Unspecified
     };
-    
+
+    [JsonPropertyName("id")]
+    public Guid Id { get; set; }
+
     [JsonPropertyName("enabled")]
     public bool Enabled { get; set; }
     
@@ -32,7 +37,7 @@ public class User : IDated
     public DateTime? LastLoginDate { get; set; }
     
     [JsonPropertyName("login_name")]
-    public string LoginName { get; set; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
 
     [JsonPropertyName("display_name")]
     public string DisplayName { get; set; } = string.Empty;
@@ -48,4 +53,5 @@ public class User : IDated
 
     [JsonPropertyName("role")]
     public UserRole Role { get; set; } = UserRole.Unspecified;
+
 }

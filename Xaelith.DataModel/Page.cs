@@ -4,9 +4,11 @@ using System.Text.Json.Serialization;
 using Xaelith.DataModel.Abstract;
 
 public record Page : IIdentifiable, 
+                     INameable,
                      IRenderable, 
                      IAuthored,
-                     IDated
+                     IDated,
+                     IRoutable
 {
     [JsonPropertyName("id")]
     public Guid Id { get; set; }
@@ -20,9 +22,12 @@ public record Page : IIdentifiable,
     [JsonPropertyName("author")]
     public User Author { get; set; } = User.Nobody;
 
-    [JsonPropertyName("title")]
-    public string Title { get; set; } = string.Empty;
+    [JsonPropertyName("name")]
+    public string Name { get; set; } = string.Empty;
 
     [JsonPropertyName("content_directory_path")]
     public string ContentDirectoryPath { get; set; } = string.Empty;
+
+    [JsonPropertyName("slug")]
+    public string Slug { get; set; } = string.Empty;
 }

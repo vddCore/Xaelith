@@ -22,4 +22,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Xaelith.Common\Xaelith.Common.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Xaelith" />
+    <InternalsVisibleTo Include="Xaelith.Common" />
+    <InternalsVisibleTo Include="Xaelith.ServiceModel" />
+  </ItemGroup>
 </Project>
