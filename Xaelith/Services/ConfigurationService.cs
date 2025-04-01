@@ -1,6 +1,6 @@
 ﻿namespace Xaelith.Services;
 
-using System.Diagnostics;
+using System.ComponentModel;
 using System.Text.Json;
 using Xaelith.DataModel.Configuration;
 using Xaelith.ServiceModel;
@@ -18,53 +18,43 @@ public class ConfigurationService : IConfigurationService
 
     public ConfigurationService()
     {
-        LoadAsync().ContinueWith(_ => SubscribeToSettingsChanges());
+        Reload();
     }
 
-    public async Task LoadAsync()
+    public void Reload()
     {
         if (Settings != null)
         {
-            throw new InvalidOperationException("Settings file was already loaded.");
+            Settings.PropertyChanged -= OnSettingsChanged;
+            Settings.Dispose();
         }
 
         try
         {
             using (var fs = File.OpenRead(SettingsFilePath))
             {
-                var settings = await JsonSerializer.DeserializeAsync<Settings>(fs);
-
-                if (settings == null)
-                {
-                    await SaveAsync();
-                }
-                else
-                {
-                    Settings = settings;
-                }
+                Settings = JsonSerializer.Deserialize<Settings>(fs);
             }
         }
-        catch (FileNotFoundException)
+        catch
         {
-            await SaveAsync();
+            // Ignore.
         }
-        catch (Exception e)
-        {
-            Debug.WriteLine(e);
-            // todo: logging.
-        }
-    }
-
-    public async Task SaveAsync()
-    {
+        
         if (Settings == null)
         {
             Settings = new Settings();
+            Save();
         }
         
+        Settings.PropertyChanged += OnSettingsChanged;
+    }
+
+    public void Save()
+    {
         using (var fs = File.Create(SettingsFilePath))
         {
-            await JsonSerializer.SerializeAsync(
+            JsonSerializer.Serialize(
                 fs,
                 Settings,
                 new JsonSerializerOptions { WriteIndented = true }
@@ -72,11 +62,6 @@ public class ConfigurationService : IConfigurationService
         }
     }
 
-    private void SubscribeToSettingsChanges()
-    {
-        if (Settings == null)
-            return;
-        
-        Settings.PropertyChanged += async (_, _) =>  await SaveAsync();
-    }
+    private void OnSettingsChanged(object? _, PropertyChangedEventArgs _)
+        => Save();
 }

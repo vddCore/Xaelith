@@ -1,4 +1,4 @@
-﻿namespace Xaelith;
+﻿namespace Xaelith.Common;
 
 public static class KnownPaths
 {

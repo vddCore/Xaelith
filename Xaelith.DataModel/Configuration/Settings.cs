@@ -3,42 +3,30 @@
 using System.ComponentModel;
 using System.Text.Json.Serialization;
 
-public sealed class Settings : INotifyPropertyChanged
+public sealed partial class Settings : INotifyPropertyChanged, IDisposable
 {
     public event PropertyChangedEventHandler? PropertyChanged;
     
     [JsonPropertyName("core")]
-    public CoreSection Core { get; set; } = new();
+    public Sections.Core Core { get; set; } = new();
 
     [JsonPropertyName("general")]
-    public GeneralSection General { get; set; } = new();
+    public Sections.General General { get; set; } = new();
 
     public Settings()
     {
-        Core.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(sender, args);
-        General.PropertyChanged += (sender, args) => PropertyChanged?.Invoke(sender, args);
+        Core.PropertyChanged += OnSectionPropertyChanged;
+        General.PropertyChanged += OnSectionPropertyChanged;
     }
 
-    public class CoreSection : INotifyPropertyChanged
+    private void OnSectionPropertyChanged(object? sender, PropertyChangedEventArgs args)
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
-        
-        [JsonPropertyName("plugins_directory")]
-        public string PluginsDirectory { get; set; } = "xa-plugins";
-        
-        [JsonPropertyName("data_directory")]
-        public string DataDirectory { get; set; } = "xa-data";
-
-        internal CoreSection()
-        {
-        }
+        PropertyChanged?.Invoke(sender, args);
     }
 
-    public class GeneralSection : INotifyPropertyChanged
+    public void Dispose()
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
-        
-        [JsonPropertyName("title")]
-        public string Title { get; set; } = "Xaelith Blog";
+        Core.PropertyChanged -= OnSectionPropertyChanged;
+        General.PropertyChanged -= OnSectionPropertyChanged;
     }
 }

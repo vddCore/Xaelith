@@ -7,6 +7,6 @@ public interface IConfigurationService
     string SettingsFilePath { get; }
     Settings Settings { get; }
     
-    Task LoadAsync();
-    Task SaveAsync();
+    void Reload();
+    void Save();
 }
