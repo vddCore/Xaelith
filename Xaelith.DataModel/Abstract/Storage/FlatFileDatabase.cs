@@ -15,6 +15,9 @@ public abstract class FlatFileDatabase<T>
     
     [JsonIgnore]
     internal bool SuppressEvents { get; set; }
+
+    [JsonPropertyName("next_ordinal")]
+    public uint NextOrdinal { get; protected set; } = 0;
     
     [JsonPropertyName("entries")]
     public ObservableCollection<T> Entries { get; set; } = [];
@@ -44,16 +47,19 @@ public abstract class FlatFileDatabase<T>
     public virtual void Save()
     {
         if (FilePath == null)
-        {
             throw new InvalidOperationException("File path is not set.");
-        }
         
         using (var stream = new FileStream(FilePath, FileMode.Create, FileAccess.Write, FileShare.Read))
-        {
             JsonSerializer.Serialize(stream, this);
-        }
     }
 
     protected void RaiseUpdatedEvent(DatabaseUpdateEventArgs<T> e)
         => Updated?.Invoke(this, e);
+
+    protected void Suppressed(Action action)
+    {
+        SuppressEvents = true;
+        action();
+        SuppressEvents = false;
+    }
 }

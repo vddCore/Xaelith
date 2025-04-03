@@ -4,11 +4,13 @@ using System.Text.Json.Serialization;
 using Xaelith.DataModel.Abstract;
 
 public record User : IIdentifiable,
+                     IOrderable,
                      IDated,
                      INameable
 {
     public static readonly User Nobody = new()
     {
+        Id = Guid.Empty,
         Enabled = false,
         CreatedDate = DateTime.UnixEpoch,
         LastEditDate = DateTime.UnixEpoch,
@@ -23,6 +25,9 @@ public record User : IIdentifiable,
 
     [JsonPropertyName("id")]
     public Guid Id { get; set; }
+    
+    [JsonPropertyName("ordinal")]
+    public uint Ordinal { get; set; }
 
     [JsonPropertyName("enabled")]
     public bool Enabled { get; set; }
@@ -53,5 +58,4 @@ public record User : IIdentifiable,
 
     [JsonPropertyName("role")]
     public UserRole Role { get; set; } = UserRole.Unspecified;
-
 }

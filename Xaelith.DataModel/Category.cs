@@ -4,6 +4,7 @@ using System.Text.Json.Serialization;
 using Xaelith.DataModel.Abstract;
 
 public record Category(string name) : IIdentifiable,
+                                      IOrderable,
                                       INameable,
                                       IAuthored,
                                       IDated
@@ -11,7 +12,10 @@ public record Category(string name) : IIdentifiable,
     public static readonly Category None = new("None");
 
     [JsonPropertyName("id")]
-    public Guid Id { get; set; } = Guid.NewGuid();
+    public Guid Id { get; set; }
+    
+    [JsonPropertyName("ordinal")]
+    public uint Ordinal { get; set; }
 
     [JsonPropertyName("name")]
     public string Name { get; set; } = name;

@@ -4,13 +4,17 @@ using System.Text.Json.Serialization;
 using Xaelith.DataModel.Abstract;
 
 public record Tag(string name) : IIdentifiable,
+                                 IOrderable,
                                  INameable,
                                  IDated,
                                  IAuthored,
                                  IRoutable
 {
     [JsonPropertyName("id")]
-    public Guid Id { get; set; } = Guid.NewGuid();
+    public Guid Id { get; set; }
+    
+    [JsonPropertyName("ordinal")]
+    public uint Ordinal { get; set; }
 
     [JsonPropertyName("created_date")]
     public DateTime CreatedDate { get; set; }

@@ -4,6 +4,7 @@ using System.Text.Json.Serialization;
 using Xaelith.DataModel.Abstract;
 
 public record Page : IIdentifiable, 
+                     IOrderable,
                      INameable,
                      IRenderable, 
                      IAuthored,
@@ -12,6 +13,9 @@ public record Page : IIdentifiable,
 {
     [JsonPropertyName("id")]
     public Guid Id { get; set; }
+    
+    [JsonPropertyName("ordinal")]
+    public uint Ordinal { get; set; }
     
     [JsonPropertyName("created_date")]
     public DateTime CreatedDate { get; set; }

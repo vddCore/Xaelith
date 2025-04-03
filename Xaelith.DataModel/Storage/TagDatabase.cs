@@ -9,9 +9,11 @@ public class TagDatabase : FlatFileDatabase<Tag>
     {
         var tag = new Tag
         {
-            CreatedDate = DateTime.Now,
+            Id = Guid.NewGuid(),
+            Ordinal = NextOrdinal++,
             Author = author,
             Name = name,
+            CreatedDate = DateTime.Now,
             Slug = UrlUtilities.GenerateSlug(name)
         };
         
@@ -44,12 +46,10 @@ public class TagDatabase : FlatFileDatabase<Tag>
 
     public bool DeleteTag(string name)
     {
-        var tag = Entries.FirstOrDefault(x => x.Name == name);
+        var tag = Find(name).FirstOrDefault();
 
         if (tag == null)
-        {
             return false;
-        }
 
         DeleteTag(tag);
         return true;
@@ -59,17 +59,15 @@ public class TagDatabase : FlatFileDatabase<Tag>
     {
         var prev = tag;
         
-        Entries.Remove(tag);
-        {
-            changes(tag);
-            tag.LastEditDate = DateTime.Now;
-            
-            RaiseUpdatedEvent(new DatabaseUpdateEventArgs<Tag>(
-                DatabaseUpdateAction.Edit,
-                prev,
-                tag
-            ));
-        }
-        Entries.Add(tag);
+        Suppressed(() => Entries.Remove(tag));
+        changes(tag);
+        tag.LastEditDate = DateTime.Now;
+        Suppressed(() => Entries.Add(tag));
+        
+        RaiseUpdatedEvent(new DatabaseUpdateEventArgs<Tag>(
+            DatabaseUpdateAction.Edit,
+            prev,
+            tag
+        ));
     }
 }
