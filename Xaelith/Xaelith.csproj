@@ -6,17 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\xa-data\content\**\*"
-             Condition="$(Configuration) == 'Release'" />
-    <Folder Include="wwwroot\xa-data\content\**\**"
-             Condition="$(Configuration) != 'Release'" />
+    <_ContentIncludedByDefault Remove="wwwroot\xa-data\content\**\*"
+                               Condition="$(Configuration) == 'Release'" />
   </ItemGroup>
   
   <ItemGroup>
     <Folder Include="wwwroot\xa-data\" />
     <Folder Include="wwwroot\xa-admin\" />    
     <Folder Include="wwwroot\xa-plugins\" />
-    <Folder Include="wwwroot\xa-themes\" />
+    <Folder Include="wwwroot\xa-themes\Spectron\templates\" />
     
     <None Update="*.css" Visible="false" />
     <None Update="*.exe" Visible="false" />
@@ -30,11 +28,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Xaelith.DataModel\Xaelith.DataModel.csproj" />
     <ProjectReference Include="..\Xaelith.ServiceModel\Xaelith.ServiceModel.csproj" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <None Include="wwwroot\xa-core\style\color-scheme.css" />
-    <None Include="wwwroot\xa-core\style\main.css" />  
   </ItemGroup>
 
   <Import Project="Xaelith.Tailwind.xml" />

@@ -2,6 +2,7 @@
 
 using System.ComponentModel;
 using System.Text.Json;
+using Xaelith.Common;
 using Xaelith.DataModel.Configuration;
 using Xaelith.ServiceModel;
 

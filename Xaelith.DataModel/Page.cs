@@ -9,7 +9,8 @@ public record Page : IIdentifiable,
                      IRenderable, 
                      IAuthored,
                      IDated,
-                     IRoutable
+                     IRoutable,
+                     ITemplatable
 {
     [JsonPropertyName("id")]
     public Guid Id { get; set; }
@@ -34,4 +35,7 @@ public record Page : IIdentifiable,
 
     [JsonPropertyName("slug")]
     public string Slug { get; set; } = string.Empty;
+
+    [JsonPropertyName("template_name")]
+    public string TemplateName { get; set; } = string.Empty;
 }

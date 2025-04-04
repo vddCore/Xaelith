@@ -3,11 +3,11 @@
 using System.Text.Json.Serialization;
 using Xaelith.DataModel.Abstract;
 
-public record Category(string name) : IIdentifiable,
-                                      IOrderable,
-                                      INameable,
-                                      IAuthored,
-                                      IDated
+public record Category : IIdentifiable,
+                         IOrderable,
+                         INameable,
+                         IAuthored,
+                         IDated
 {
     public static readonly Category None = new("None");
 
@@ -18,7 +18,7 @@ public record Category(string name) : IIdentifiable,
     public uint Ordinal { get; set; }
 
     [JsonPropertyName("name")]
-    public string Name { get; set; } = name;
+    public string Name { get; set; };
 
     [JsonPropertyName("author")]
     public User Author { get; set; } = User.Nobody;
@@ -29,8 +29,12 @@ public record Category(string name) : IIdentifiable,
     [JsonPropertyName("last_edit_date")]
     public DateTime? LastEditDate { get; set; }
 
+    public Category(string name)
+    {
+        Name = name;
+    }
+    
     public Category() : this(string.Empty)
     {
     }
-
 }

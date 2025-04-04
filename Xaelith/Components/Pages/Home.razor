@@ -1,7 +1,8 @@
 ﻿@page "/"
 
-<PageTitle>Home</PageTitle>
+@using Xaelith.DataModel
+@using Xaelith.ServiceModel
 
-<h1>Hello, world!</h1>
+@inject IStorageService Storage;
 
-Welcome to your new app.
+<button @onclick='() => Storage.Tags.CreateNewTag(User.Nobody, "test-tag")'>clicky!</button>
