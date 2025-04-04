@@ -11,6 +11,7 @@
   </ItemGroup>
   
   <ItemGroup>
+    <Folder Include="Components\Styling\" />
     <Folder Include="wwwroot\xa-data\" />
     <Folder Include="wwwroot\xa-admin\" />    
     <Folder Include="wwwroot\xa-plugins\" />

@@ -29,8 +29,4 @@
     <InternalsVisibleTo Include="Xaelith.Common" />
     <InternalsVisibleTo Include="Xaelith.ServiceModel" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Templating\" />
-  </ItemGroup>
 </Project>

@@ -1,4 +1,7 @@
-﻿@import url('./color-scheme.css');
+﻿@import url('../fonts/rajdhani/css/rajdhani.css');
+@import url('../fonts/vermin-vibes/css/vermin-vibes.css');
+
+@import url('./color-scheme.css');
 
 html, body {
     height: 100%;

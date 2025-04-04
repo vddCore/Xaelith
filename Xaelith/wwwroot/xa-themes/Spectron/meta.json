@@ -2,5 +2,9 @@
   "name": "Spectron",
   "version": "1.0.0",
   "description": "Default theme for Xaelith",
-  "author": "vddCore"
+  "author": "vddCore",
+  "provides": {
+    "admin": true,
+    "front": true
+  }
 }

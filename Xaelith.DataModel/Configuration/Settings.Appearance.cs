@@ -11,8 +11,11 @@ public sealed partial class Settings
         {
             public event PropertyChangedEventHandler? PropertyChanged;
 
-            [JsonPropertyName("theme")]
-            public string Theme { get; set; } = string.Empty;
+            [JsonPropertyName("front_theme")]
+            public string FrontTheme { get; set; } = string.Empty;
+            
+            [JsonPropertyName("admin_theme")]
+            public string AdminTheme { get; set; } = string.Empty;
         }
     }
 }
