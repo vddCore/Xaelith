@@ -7,6 +7,7 @@ using Xaelith.DataModel.Abstract;
 public record Post : IIdentifiable,
                      IOrderable,
                      INameable,
+                     IAuthored,
                      IDated, 
                      IRenderable,
                      IRoutable
@@ -23,8 +24,8 @@ public record Post : IIdentifiable,
     [JsonPropertyName("last_edit_date")]
     public DateTime? LastEditDate { get; set; }
     
-    [JsonPropertyName("author")]
-    public string Author { get; set; } = string.Empty;
+    [JsonPropertyName("author_user_id")]
+    public Guid AuthorUserId { get; set; } = User.Nobody.Id;
     
     [JsonPropertyName("name")]
     public string Name { get; set; } = string.Empty;

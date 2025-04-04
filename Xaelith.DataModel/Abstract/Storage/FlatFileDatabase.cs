@@ -1,12 +1,11 @@
 ﻿namespace Xaelith.DataModel.Abstract.Storage;
 
-using System.Collections.ObjectModel;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Xaelith.DataModel.Storage;
 
 public abstract class FlatFileDatabase<T> 
-    where T : class, new()
+    where T : class, IIdentifiable, new()
 {
     public event EventHandler<DatabaseUpdateEventArgs<T>>? Updated; 
     
@@ -20,17 +19,28 @@ public abstract class FlatFileDatabase<T>
     public uint NextOrdinal { get; protected set; } = 0;
     
     [JsonPropertyName("entries")]
-    public ObservableCollection<T> Entries { get; set; } = [];
+    public Dictionary<Guid, T> Entries { get; set; } = [];
+
+    public bool Add(T entity)
+    {
+        if (Entries.ContainsKey(entity.Id))
+            return false;
+        
+        Entries.Add(entity.Id, entity);
+        return true;
+    }
+
+    public bool Remove(T entity)
+        => Entries.Remove(entity.Id);
 
     public T? Find(Guid id)
     {
-        if (!Entries.Any())
-            return null;
+        if (Entries.TryGetValue(id, out var entry))
+        {
+            return entry;
+        }
         
-        if (!typeof(T).IsAssignableTo(typeof(IIdentifiable)))
-            throw new InvalidOperationException("This database does not support lookup by GUID.");
-        
-        return Entries.Single(x => (x as IIdentifiable)!.Id == id);
+        return default(T?);
     }
 
     public IEnumerable<T> Find(string name)
@@ -41,7 +51,7 @@ public abstract class FlatFileDatabase<T>
         if (!typeof(T).IsAssignableTo(typeof(INameable)))
             throw new InvalidOperationException("This database does not support lookup by name.");
         
-        return Entries.Where(x => (x as INameable)?.Name == name);
+        return Entries.Values.Where(x => ((INameable)x).Name == name);
     }
 
     public virtual void Save()

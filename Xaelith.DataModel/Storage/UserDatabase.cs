@@ -5,7 +5,7 @@ using Xaelith.DataModel.Abstract.Storage;
 
 public class UserDatabase : FlatFileDatabase<User>
 {
-    public User CreateNewUser(
+    public User? CreateNewUser(
         string name,
         string email = "",
         bool enabledByDefault = true)
@@ -15,10 +15,10 @@ public class UserDatabase : FlatFileDatabase<User>
         {
             throw new DuplicateNameException(
                 name,
-                $"User with the provided name already exists."
+                $"A user with the provided name already exists."
             );
         }
-        
+
         var user = new User
         {
             Id = Guid.NewGuid(),
@@ -32,20 +32,24 @@ public class UserDatabase : FlatFileDatabase<User>
             Role = UserRole.Editor,
             PasswordHash = string.Empty,
         };
-        
-        Entries.Add(user);
-        RaiseUpdatedEvent(new DatabaseUpdateEventArgs<User>(
-            DatabaseUpdateAction.Add,
-            null,
-            user
-        ));
 
-        return user;
+        if (Add(user))
+        {
+            RaiseUpdatedEvent(new DatabaseUpdateEventArgs<User>(
+                DatabaseUpdateAction.Add,
+                null,
+                user
+            ));
+
+            return user;
+        }
+
+        return null;
     }
 
     public bool DeleteUser(User user)
     {
-        if (Entries.Remove(user))
+        if (Remove(user))
         {
             RaiseUpdatedEvent(new DatabaseUpdateEventArgs<User>(
                 DatabaseUpdateAction.Delete,
@@ -62,7 +66,7 @@ public class UserDatabase : FlatFileDatabase<User>
     public bool DeleteUser(Guid userId)
     {
         var user = Find(userId);
-        
+
         if (user == null)
             return false;
 
@@ -72,22 +76,22 @@ public class UserDatabase : FlatFileDatabase<User>
     public bool DeleteUser(string name)
     {
         var user = Find(name).FirstOrDefault();
-        
+
         if (user == null)
             return false;
 
         return DeleteUser(user);
     }
 
-    public void EditUser(User user, Action<User> changes)
+    public void EditUser(User user, Action<User> mutator)
     {
-        var prev = user;
-        
-        Suppressed(() => Entries.Remove(user));
-        changes(user);
+        var prev = user with { };
+
+        Remove(user);
+        mutator(user);
         user.LastEditDate = DateTime.Now;
-        Suppressed(() => Entries.Add(user));
-        
+        Add(user);
+
         RaiseUpdatedEvent(new DatabaseUpdateEventArgs<User>(
             DatabaseUpdateAction.Edit,
             prev,

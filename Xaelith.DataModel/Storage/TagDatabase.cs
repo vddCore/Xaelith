@@ -5,39 +5,42 @@ using Xaelith.DataModel.Abstract.Storage;
 
 public class TagDatabase : FlatFileDatabase<Tag>
 {
-    public Tag CreateNewTag(User author, string name)
+    public Tag? CreateNewTag(User author, string name)
     {
         var tag = new Tag
         {
             Id = Guid.NewGuid(),
             Ordinal = NextOrdinal++,
-            Author = author,
+            AuthorUserId = author.Id,
             Name = name,
             CreatedDate = DateTime.Now,
             Slug = UrlUtilities.GenerateSlug(name)
         };
-        
-        Entries.Add(tag);
 
-        RaiseUpdatedEvent(new DatabaseUpdateEventArgs<Tag>(
-            DatabaseUpdateAction.Add,
-            null,
-            tag
-        ));
-        
-        return tag;
+        if (Add(tag))
+        {
+            RaiseUpdatedEvent(new DatabaseUpdateEventArgs<Tag>(
+                DatabaseUpdateAction.Add,
+                null,
+                tag
+            ));
+
+            return tag;
+        }
+
+        return null;
     }
 
     public bool DeleteTag(Tag tag)
     {
-        if (Entries.Remove(tag))
+        if (Remove(tag))
         {
             RaiseUpdatedEvent(new DatabaseUpdateEventArgs<Tag>(
                 DatabaseUpdateAction.Delete,
                 tag,
                 null
             ));
-            
+
             return true;
         }
 
@@ -55,15 +58,15 @@ public class TagDatabase : FlatFileDatabase<Tag>
         return true;
     }
 
-    public void EditTag(Tag tag, Action<Tag> changes)
+    public void EditTag(Tag tag, Action<Tag> mutator)
     {
-        var prev = tag;
-        
-        Suppressed(() => Entries.Remove(tag));
-        changes(tag);
+        var prev = tag with { };
+
+        Remove(tag);
+        mutator(tag);
         tag.LastEditDate = DateTime.Now;
-        Suppressed(() => Entries.Add(tag));
-        
+        Add(tag);
+
         RaiseUpdatedEvent(new DatabaseUpdateEventArgs<Tag>(
             DatabaseUpdateAction.Edit,
             prev,

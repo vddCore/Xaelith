@@ -13,6 +13,14 @@ public sealed partial class Settings
         
             [JsonPropertyName("title")]
             public string Title { get; set; } = "Xaelith Blog";
+
+            [JsonPropertyName("description")]
+            public string Description { get; set; } = "A brand new Xaelith Blog!";
+            
+            [JsonPropertyName("home_url")]
+            public string HomeUrl { get; set; } = string.Empty;
+            
+            
         }
     }
 }

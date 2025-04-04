@@ -13,20 +13,25 @@ public sealed partial class Settings : INotifyPropertyChanged, IDisposable
     [JsonPropertyName("general")]
     public Sections.General General { get; set; } = new();
 
+    [JsonPropertyName("appearance")]
+    public Sections.Appearance Appearance { get; set; } = new();
+
     public Settings()
     {
-        Core.PropertyChanged += OnSectionPropertyChanged;
-        General.PropertyChanged += OnSectionPropertyChanged;
+        Core.PropertyChanged += OnSectionModified;
+        General.PropertyChanged += OnSectionModified;
+        Appearance.PropertyChanged += OnSectionModified;
     }
 
-    private void OnSectionPropertyChanged(object? sender, PropertyChangedEventArgs args)
+    private void OnSectionModified(object? sender, PropertyChangedEventArgs args)
     {
         PropertyChanged?.Invoke(sender, args);
     }
 
     public void Dispose()
     {
-        Core.PropertyChanged -= OnSectionPropertyChanged;
-        General.PropertyChanged -= OnSectionPropertyChanged;
+        Appearance.PropertyChanged -= OnSectionModified;
+        General.PropertyChanged -= OnSectionModified;
+        Core.PropertyChanged -= OnSectionModified;
     }
 }

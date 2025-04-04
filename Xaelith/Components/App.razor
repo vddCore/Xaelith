@@ -6,7 +6,7 @@
 <html lang="en">
 
 <head>
-    <title>@Configuration.Settings!.General.Title</title>
+    <title>@Configuration.Settings.General.Title</title>
     
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -14,13 +14,12 @@
     <base href="/"/>
 
     <link rel="stylesheet" href="../wwwroot/xa-core/style/tailwind.css"/>
-    <link rel="stylesheet" href="../wwwroot/xa-core/style/main.css"/>
     <ImportMap/>
     <HeadOutlet/>
 </head>
 
 <body>
-<Routes/>
+<Routes @rendermode=InteractiveServer />
 <script src="_framework/blazor.web.js"></script>
 </body>
 

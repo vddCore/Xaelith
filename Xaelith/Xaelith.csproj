@@ -14,7 +14,9 @@
     <Folder Include="wwwroot\xa-data\" />
     <Folder Include="wwwroot\xa-admin\" />    
     <Folder Include="wwwroot\xa-plugins\" />
-    <Folder Include="wwwroot\xa-themes\Spectron\templates\" />
+    <Folder Include="wwwroot\xa-themes\Spectron\fonts\" />    
+    <Folder Include="wwwroot\xa-themes\Spectron\theme\admin\" />    
+    <Folder Include="wwwroot\xa-themes\Spectron\theme\front\" />
     
     <None Update="*.css" Visible="false" />
     <None Update="*.exe" Visible="false" />
@@ -23,6 +25,7 @@
   
   <ItemGroup>
     <PackageReference Include="Markdig" Version="0.40.0" />
+    <PackageReference Include="Toolbelt.Blazor.RoutableLazyAssemblyLoader" Version="1.0.0" />
   </ItemGroup>
   
   <ItemGroup>

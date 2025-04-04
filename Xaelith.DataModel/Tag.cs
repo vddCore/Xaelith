@@ -22,8 +22,8 @@ public record Tag : IIdentifiable,
     [JsonPropertyName("last_edit_date")]
     public DateTime? LastEditDate { get; set; }
 
-    [JsonPropertyName("author")]
-    public User Author { get; set; } = User.Nobody;
+    [JsonPropertyName("author_user_id")]
+    public Guid AuthorUserId { get; set; } = User.Nobody.Id;
 
     [JsonPropertyName("name")]
     public string Name { get; set; }

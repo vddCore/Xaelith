@@ -32,7 +32,7 @@ public class StorageService : IStorageService
     }
 
     private U Load<T, U>(string fileName, bool createOnFailure = true)
-        where T : class, new()
+        where T : class, IIdentifiable, new()
         where U : FlatFileDatabase<T>, new()
     {
         FlatFileDatabase<T>? db = null;
@@ -68,7 +68,7 @@ public class StorageService : IStorageService
     }
 
     private void OnDatabaseUpdated<T>(object? sender, DatabaseUpdateEventArgs<T> args)
-        where T : class, new()
+        where T : class, IIdentifiable, new()
     {
         if (sender is not FlatFileDatabase<T> db)
             return;

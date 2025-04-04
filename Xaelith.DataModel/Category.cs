@@ -18,11 +18,11 @@ public record Category : IIdentifiable,
     public uint Ordinal { get; set; }
 
     [JsonPropertyName("name")]
-    public string Name { get; set; };
+    public string Name { get; set; }
 
-    [JsonPropertyName("author")]
-    public User Author { get; set; } = User.Nobody;
-
+    [JsonPropertyName("author_user_id")]
+    public Guid AuthorUserId { get; set; } = User.Nobody.Id;
+    
     [JsonPropertyName("created_date")]
     public DateTime CreatedDate { get; set; }
 

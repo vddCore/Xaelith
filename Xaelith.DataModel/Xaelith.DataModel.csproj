@@ -4,6 +4,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <NoWarn>CS0067</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,5 +28,9 @@
     <InternalsVisibleTo Include="Xaelith" />
     <InternalsVisibleTo Include="Xaelith.Common" />
     <InternalsVisibleTo Include="Xaelith.ServiceModel" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Templating\" />
   </ItemGroup>
 </Project>
