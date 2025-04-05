@@ -25,8 +25,6 @@ internal class Startup
         app.UseHttpsRedirection()
            .UseAntiforgery();
 
-        app.MapStaticAssets();
-
         app.MapRazorComponents<App>()
            .AddInteractiveServerRenderMode();
 

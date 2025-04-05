@@ -12,9 +12,6 @@ public abstract class FlatFileDatabase<T>
     [JsonIgnore]
     public string? FilePath { get; internal set; }
     
-    [JsonIgnore]
-    internal bool SuppressEvents { get; set; }
-
     [JsonPropertyName("next_ordinal")]
     public uint NextOrdinal { get; protected set; } = 0;
     
@@ -65,11 +62,4 @@ public abstract class FlatFileDatabase<T>
 
     protected void RaiseUpdatedEvent(DatabaseUpdateEventArgs<T> e)
         => Updated?.Invoke(this, e);
-
-    protected void Suppressed(Action action)
-    {
-        SuppressEvents = true;
-        action();
-        SuppressEvents = false;
-    }
 }
