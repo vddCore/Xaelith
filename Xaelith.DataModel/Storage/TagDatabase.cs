@@ -11,7 +11,7 @@ public class TagDatabase : FlatFileDatabase<Tag>
         {
             Id = Guid.NewGuid(),
             Ordinal = NextOrdinal++,
-            AuthorUserId = author.Id,
+            Author = author.Id,
             Name = name,
             CreatedDate = DateTime.Now,
             Slug = UrlUtilities.GenerateSlug(name)

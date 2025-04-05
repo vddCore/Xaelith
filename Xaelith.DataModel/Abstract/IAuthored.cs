@@ -2,5 +2,5 @@
 
 public interface IAuthored
 {
-    Guid AuthorUserId { get; set; }
+    Guid Author { get; set; }
 }

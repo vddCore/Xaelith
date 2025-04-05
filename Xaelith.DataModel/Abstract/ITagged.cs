@@ -2,5 +2,5 @@
 
 public interface ITagged
 {
-    List<Tag> Tags { get; set; }
+    List<Guid> TagIds { get; set; }
 }

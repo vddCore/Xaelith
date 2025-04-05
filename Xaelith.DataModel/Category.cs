@@ -5,9 +5,10 @@ using Xaelith.DataModel.Abstract;
 
 public record Category : IIdentifiable,
                          IOrderable,
-                         INameable,
+                         IDated,
                          IAuthored,
-                         IDated
+                         INameable,
+                         IDescribable
 {
     public static readonly Category None = new("None");
 
@@ -16,18 +17,22 @@ public record Category : IIdentifiable,
     
     [JsonPropertyName("ordinal")]
     public uint Ordinal { get; set; }
-
-    [JsonPropertyName("name")]
-    public string Name { get; set; }
-
-    [JsonPropertyName("author_user_id")]
-    public Guid AuthorUserId { get; set; } = User.Nobody.Id;
     
     [JsonPropertyName("created_date")]
     public DateTime CreatedDate { get; set; }
 
     [JsonPropertyName("last_edit_date")]
     public DateTime? LastEditDate { get; set; }
+
+    [JsonPropertyName("author")]
+    public Guid Author { get; set; } = User.Nobody.Id;
+    
+    [JsonPropertyName("name")]
+    public string Name { get; set; }
+    
+    [JsonPropertyName("description")]
+    public string Description { get; set; } = string.Empty;
+    
 
     public Category(string name)
     {

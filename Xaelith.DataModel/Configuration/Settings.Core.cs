@@ -25,6 +25,9 @@ public sealed partial class Settings
             
             [JsonPropertyName("post_db")]
             public string PostDatabase { get; set; } = "posts.json";
+            
+            [JsonPropertyName("content_body_file_name")]
+            public string ContentBodyFileName { get; set; } = "body.md";
         }
     }
 }

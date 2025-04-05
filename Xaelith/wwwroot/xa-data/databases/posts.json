@@ -1,0 +1,18 @@
+{
+  "next_ordinal": 0,
+  "entries":
+  {
+    "ecf604aa-da58-48c2-a5d1-4ee074bf1f43": {
+      "id": "ecf604aa-da58-48c2-a5d1-4ee074bf1f43",
+      "ordinal": 0,
+      "created_date": "2025-04-05T22:07:20 +01:00",
+      "last_edit_date": null,
+      "author_user_id": "00000000-0000-0000-0000-000000000000",
+      "name": "Test post",
+      "description": "A test post. For testing!",
+      "category_id": "00000000-0000-0000-0000-000000000000",
+      "tags": [],
+      "slug": "test-post"
+    }
+  }
+}

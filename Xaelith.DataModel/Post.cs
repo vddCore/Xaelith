@@ -6,10 +6,11 @@ using Xaelith.DataModel.Abstract;
 
 public record Post : IIdentifiable,
                      IOrderable,
-                     INameable,
-                     IAuthored,
                      IDated, 
-                     IRenderable,
+                     IAuthored,
+                     INameable,
+                     IDescribable,
+                     ITagged,
                      IRoutable
 {
     [JsonPropertyName("id")]
@@ -24,20 +25,20 @@ public record Post : IIdentifiable,
     [JsonPropertyName("last_edit_date")]
     public DateTime? LastEditDate { get; set; }
     
-    [JsonPropertyName("author_user_id")]
-    public Guid AuthorUserId { get; set; } = User.Nobody.Id;
+    [JsonPropertyName("author")]
+    public Guid Author { get; set; } = User.Nobody.Id;
     
     [JsonPropertyName("name")]
     public string Name { get; set; } = string.Empty;
     
-    [JsonPropertyName("content_directory_path")]
-    public string ContentDirectoryPath { get; set; } = string.Empty;
+    [JsonPropertyName("description")]
+    public string Description { get; set; } = string.Empty;
     
     [JsonPropertyName("category")]
-    public Category Category { get; set; } = Category.None;
+    public Guid CategoryId { get; set; } = Category.None.Id;
 
     [JsonPropertyName("tags")]
-    public List<Tag> Tags { get; set; } = [];
+    public List<Guid> TagIds { get; set; } = [];
 
     [JsonPropertyName("slug")]
     public string Slug { get; set; } = string.Empty;
@@ -50,5 +51,4 @@ public record Post : IIdentifiable,
                 ?? throw new IOException($"The file '{filePath}' could not be deserialized.");
         }
     }
-
 }

@@ -5,8 +5,8 @@ using Xaelith.DataModel.Abstract;
 
 public record Tag : IIdentifiable,
                     IOrderable,
-                    INameable,
                     IDated,
+                    INameable,
                     IAuthored,
                     IRoutable
 {
@@ -22,8 +22,8 @@ public record Tag : IIdentifiable,
     [JsonPropertyName("last_edit_date")]
     public DateTime? LastEditDate { get; set; }
 
-    [JsonPropertyName("author_user_id")]
-    public Guid AuthorUserId { get; set; } = User.Nobody.Id;
+    [JsonPropertyName("author")]
+    public Guid Author { get; set; } = User.Nobody.Id;
 
     [JsonPropertyName("name")]
     public string Name { get; set; }

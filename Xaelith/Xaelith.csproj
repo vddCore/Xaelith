@@ -11,7 +11,6 @@
   </ItemGroup>
   
   <ItemGroup>
-    <Folder Include="wwwroot\xa-data\" />
     <Folder Include="wwwroot\xa-admin\" />    
     <Folder Include="wwwroot\xa-plugins\" />
     <Folder Include="wwwroot\xa-themes\Spectron\fonts\" />    
