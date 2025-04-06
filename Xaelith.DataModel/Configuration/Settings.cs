@@ -3,9 +3,9 @@
 using System.ComponentModel;
 using System.Text.Json.Serialization;
 
-public sealed partial class Settings : INotifyPropertyChanged, IDisposable
+public sealed partial class Settings : IDisposable
 {
-    public event PropertyChangedEventHandler? PropertyChanged;
+    public event EventHandler<SectionChangedEventArgs>? SectionChanged;
     
     [JsonPropertyName("core")]
     public Sections.Core Core { get; set; } = new();
@@ -25,7 +25,20 @@ public sealed partial class Settings : INotifyPropertyChanged, IDisposable
 
     private void OnSectionModified(object? sender, PropertyChangedEventArgs args)
     {
-        PropertyChanged?.Invoke(sender, args);
+        if (sender is not SettingsSection section || string.IsNullOrEmpty(args.PropertyName))
+            return;
+
+        var jsonPropertyKey = section.GetJsonPropertyKey(args.PropertyName);
+
+        SectionChanged?.Invoke(
+            this,
+            new SectionChangedEventArgs(
+                section,
+                args.PropertyName,
+                jsonPropertyKey,
+                section[jsonPropertyKey]
+            )
+        );
     }
 
     public void Dispose()

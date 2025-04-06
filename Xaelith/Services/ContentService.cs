@@ -1,6 +1,7 @@
 ﻿namespace Xaelith.Services;
 
 using Markdig;
+using Markdig.Extensions.AutoIdentifiers;
 using Xaelith.Common;
 using Xaelith.DataModel;
 using Xaelith.DataModel.Configuration;
@@ -9,11 +10,16 @@ using Xaelith.ServiceModel;
 
 public class ContentService : IContentService
 {
+    private readonly MarkdownPipeline _pipeline;
     private readonly Settings _settings;
     
-    public ContentService(ConfigurationService configurationService)
+    public ContentService(IConfigurationService configurationService)
     {
-        _settings = configurationService.Settings!;
+        _settings = configurationService.Settings;
+        _pipeline = new MarkdownPipelineBuilder()
+            .UseAdvancedExtensions()
+            .UseAutoIdentifiers(AutoIdentifierOptions.GitHub)
+            .Build();
     }
     
     public DirectoryInfo GetContentDirectory(Post post)
@@ -35,7 +41,7 @@ public class ContentService : IContentService
             throw new MissingContentException(post.Id, $"Cannot find content body file for post {post.Id}.");
 
         using (var sr = postContentFile.OpenText())
-            return Markdown.ToHtml(sr.ReadToEnd());
+            return Markdown.ToHtml(sr.ReadToEnd(), _pipeline);
     }
     
     public void ReplaceContent(Post post, string newContent)
@@ -70,7 +76,7 @@ public class ContentService : IContentService
             throw new MissingContentException(page.Id, $"Cannot find content body file for page {page.Id}.");
         
         using (var sr = pageContentFile.OpenText())
-            return Markdown.ToHtml(sr.ReadToEnd());
+            return Markdown.ToHtml(sr.ReadToEnd(), _pipeline);
     }
 
     public void ReplaceContent(Page page, string newContent)

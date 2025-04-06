@@ -1,0 +1,20 @@
+{
+  "appearance": {
+    "front_theme": "Spectron",
+    "admin_theme": "Spectron"
+  },
+  "core": {
+    "user_db": "users.json",
+    "tag_db": "tags.json",
+    "category_db": "categories.json",
+    "page_db": "pages.json",
+    "post_db": "posts.json",
+    "content_body_file_name": "body.md"
+  },
+  "general": {
+    "title": "Xaelith Blog",
+    "description": "A brand new Xaelith Blog!",
+    "home_url": "https://localhost/",
+    "language": "en_US"
+  }
+}

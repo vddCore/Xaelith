@@ -35,10 +35,10 @@ public record Post : IIdentifiable,
     public string Description { get; set; } = string.Empty;
     
     [JsonPropertyName("category")]
-    public Guid CategoryId { get; set; } = Category.None.Id;
+    public Guid Category { get; set; } = DataModel.Category.None.Id;
 
     [JsonPropertyName("tags")]
-    public List<Guid> TagIds { get; set; } = [];
+    public List<Guid> Tags { get; set; } = [];
 
     [JsonPropertyName("slug")]
     public string Slug { get; set; } = string.Empty;

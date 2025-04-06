@@ -29,6 +29,6 @@
   
   <Target Name="Tailwind:Run" AfterTargets="AfterBuild" DependsOnTargets="Tailwind:Permission">
     <Message Importance="high" Text="Building CSS with Tailwind" />
-    <Exec Command="$(TailwindExecutable) -i .\tailwind.css -o .\wwwroot\xa-core\style\tailwind.css" />
+    <Exec Command="$(TailwindExecutable) -i .\tailwind.css -o .\xa-core\style\tailwind.css" />
   </Target>
 </Project>

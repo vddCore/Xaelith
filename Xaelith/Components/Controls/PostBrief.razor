@@ -1,0 +1,47 @@
+﻿@using Xaelith.DataModel
+@using Xaelith.ServiceModel
+
+@inject ILanguageService L;
+@inject IContentService Content;
+@inject IStorageService Storage;
+
+<div class="post-brief">
+    <h2>@Post.Name</h2>
+
+    <div class="post-content">
+        @((MarkupString)Content.RenderContent(Post))
+    </div>
+
+    <div class="post-meta">
+        <span class="post-author">
+            @(Storage.Users.Find(Post.Author)?.Name
+                  ?? L.Translate("nobody"))
+        </span>
+
+        <span class="post-category">
+            @(Storage.Categories.Find(Post.Category)?.Name
+                  ?? L.Translate("no category"))
+        </span>
+
+        <span class="post-tags">
+            @{
+                foreach (var id in Post.Tags)
+                {
+                    Tag? tag = Storage.Tags.Find(id);
+
+                    if (tag != null)
+                    {
+                        <a class="post-tag" href="#">@tag.Name</a>
+                    }
+                }
+            }
+        </span>
+    </div>
+</div>
+
+@code {
+
+    [Parameter, EditorRequired]
+    public required Post Post { get; set; }
+
+}

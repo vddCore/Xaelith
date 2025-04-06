@@ -1,8 +1,13 @@
 ﻿@page "/"
 
-@using Xaelith.DataModel
 @using Xaelith.ServiceModel
+@using Xaelith.Components.Controls
 
 @inject IStorageService Storage;
 
-<button @onclick='() => Storage.Tags.CreateNewTag(User.Nobody, "test-tag")'>clicky!</button>
+@{
+    foreach (var post in Storage.Posts.Entries.Values)
+    {
+        <PostBrief Post="@post" />
+    }
+}

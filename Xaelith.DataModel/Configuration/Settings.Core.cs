@@ -7,9 +7,10 @@ public sealed partial class Settings
 {
     public static partial class Sections
     {
-        public class Core : INotifyPropertyChanged
+        public class Core : SettingsSection
         {
-            public event PropertyChangedEventHandler? PropertyChanged;
+            [JsonPropertyName("lang_directory_name")]
+            public string LanguageDirectoryName { get; set; } = "lang";
 
             [JsonPropertyName("user_db")]
             public string UserDatabase { get; set; } = "users.json";

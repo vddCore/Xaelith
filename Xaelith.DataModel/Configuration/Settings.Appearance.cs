@@ -7,10 +7,8 @@ public sealed partial class Settings
 {
     public static partial class Sections
     {
-        public class Appearance : INotifyPropertyChanged
+        public class Appearance : SettingsSection
         {
-            public event PropertyChangedEventHandler? PropertyChanged;
-
             [JsonPropertyName("front_theme")]
             public string FrontTheme { get; set; } = string.Empty;
             

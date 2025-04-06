@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">  
+<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
@@ -6,33 +6,36 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <_ContentIncludedByDefault Remove="wwwroot\xa-data\content\**\*"
-                               Condition="$(Configuration) == 'Release'" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="wwwroot\xa-admin\" />    
-    <Folder Include="wwwroot\xa-plugins\" />
-    <Folder Include="wwwroot\xa-themes\Spectron\fonts\" />    
-    <Folder Include="wwwroot\xa-themes\Spectron\theme\admin\" />    
-    <Folder Include="wwwroot\xa-themes\Spectron\theme\front\" />
+    <Folder Remove="wwwroot\" />
     
-    <None Update="*.css" Visible="false" />
-    <None Update="*.exe" Visible="false" />
-    <None Update="*.js" Visible="false" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <PackageReference Include="Markdig" Version="0.40.0" />
-    <PackageReference Include="System.Text.Json" Version="9.0.3" />
-    <PackageReference Include="Toolbelt.Blazor.RoutableLazyAssemblyLoader" Version="1.0.0" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <ProjectReference Include="..\Xaelith.DataModel\Xaelith.DataModel.csproj" />
-    <ProjectReference Include="..\Xaelith.ServiceModel\Xaelith.ServiceModel.csproj" />
+    <Folder Include="xa-admin\" />
+    <Folder Include="xa-core\" />
+    <Folder Include="xa-data\" />
+    <Folder Include="xa-plugins\" />
+    <Folder Include="xa-themes\" />
+    
+    <Content Remove="xa-data\**\*"
+             Condition="$(Configuration) == 'Release'"/>
+
+    <None Update="*.css" Visible="false"/>
+    <None Update="*.exe" Visible="false"/>
+    <None Update="*.js" Visible="false"/>
   </ItemGroup>
 
-  <Import Project="Xaelith.Tailwind.xml" />
- 
+  <ItemGroup>
+    <PackageReference Include="Markdig" Version="0.40.0"/>
+    <PackageReference Include="System.Text.Json" Version="9.0.3"/>
+    <PackageReference Include="Toolbelt.Blazor.RoutableLazyAssemblyLoader" Version="1.0.0"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Xaelith.DataModel\Xaelith.DataModel.csproj"/>
+    <ProjectReference Include="..\Xaelith.ServiceModel\Xaelith.ServiceModel.csproj"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\xa-core\style\tailwind.css" />
+  </ItemGroup>
+
+  <Import Project="Xaelith.Tailwind.xml"/>
 </Project>

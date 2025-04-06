@@ -7,10 +7,8 @@ public sealed partial class Settings
 {
     public static partial class Sections
     {
-        public class General : INotifyPropertyChanged
+        public class General : SettingsSection
         {
-            public event PropertyChangedEventHandler? PropertyChanged;
-        
             [JsonPropertyName("title")]
             public string Title { get; set; } = "Xaelith Blog";
 
@@ -19,8 +17,9 @@ public sealed partial class Settings
             
             [JsonPropertyName("home_url")]
             public string HomeUrl { get; set; } = string.Empty;
-            
-            
+
+            [JsonPropertyName("language")]
+            public string Language { get; set; } = "en_US";
         }
     }
 }

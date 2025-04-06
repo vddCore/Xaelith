@@ -26,7 +26,7 @@ public class ConfigurationService : IConfigurationService
     {
         if (Settings != null)
         {
-            Settings.PropertyChanged -= OnSettingsChanged;
+            Settings.SectionChanged -= OnSettingsChanged;
             Settings.Dispose();
         }
 
@@ -48,7 +48,7 @@ public class ConfigurationService : IConfigurationService
             Save();
         }
         
-        Settings.PropertyChanged += OnSettingsChanged;
+        Settings.SectionChanged += OnSettingsChanged;
     }
 
     public void Save()
@@ -63,6 +63,6 @@ public class ConfigurationService : IConfigurationService
         }
     }
 
-    private void OnSettingsChanged(object? _, PropertyChangedEventArgs e)
+    private void OnSettingsChanged(object? _, SectionChangedEventArgs e)
         => Save();
 }

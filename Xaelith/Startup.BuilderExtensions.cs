@@ -2,6 +2,7 @@
 
 using Xaelith.ServiceModel;
 using Xaelith.Services;
+using Xaelith.Services.Localization;
 
 internal static class BuilderExtensions
 {
@@ -9,6 +10,7 @@ internal static class BuilderExtensions
     {
         services
             .AddSingleton<IConfigurationService, ConfigurationService>()
+            .AddSingleton<ILanguageService, LanguageService>()
             .AddSingleton<IStorageService, StorageService>()
             .AddSingleton<IContentService, ContentService>();
         
